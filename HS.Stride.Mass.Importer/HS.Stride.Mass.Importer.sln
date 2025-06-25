@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36109.1 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HS.Stride.Mass.Importer.Core", "HS.Stride.Mass.Importer.Core\HS.Stride.Mass.Importer.Core.csproj", "{7F24E2C5-1848-404C-B9F9-F4DED3261CFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HS.Stride.Mass.Importer.Console", "HS.Stride.Mass.Importer.Console\HS.Stride.Mass.Importer.Console.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F24E2C5-1848-404C-B9F9-F4DED3261CFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F24E2C5-1848-404C-B9F9-F4DED3261CFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F24E2C5-1848-404C-B9F9-F4DED3261CFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F24E2C5-1848-404C-B9F9-F4DED3261CFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {699B3B93-12AD-47A6-B064-246FF27D3BFB}
+	EndGlobalSection
+EndGlobal
