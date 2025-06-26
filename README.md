@@ -60,6 +60,9 @@ The importer will automatically:
 - Generate Stride assets with correct references
 - Create basic materials for textures
 
+### TIP: Batch Material Assignment
+When working with hundreds of imported models, select multiple models in Stride Game Studio by clicking the first model, holding Shift, and clicking the last model You can then assign materials to all selected assets simultaneously in the Property Grid.
+
 ## 📁 How It Organizes Your Assets
 
 ### Input Structure (Ideally your pack is already organized like this)
