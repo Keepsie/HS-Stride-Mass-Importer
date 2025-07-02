@@ -14,10 +14,29 @@
     <Company>Happenstance Games LLC</Company>
     <Product>HS Stride Mass Importer</Product>
     <Description>WPF application for mass importing assets into Stride Engine projects</Description>
+    <ApplicationIcon>hs_mass.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="hs_mass.ico" />
+    <None Remove="hs_mass_importer.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="hs_mass.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\HS.Stride.Mass.Importer.Core\HS.Stride.Mass.Importer.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="hs_mass.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="hs_mass_importer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
