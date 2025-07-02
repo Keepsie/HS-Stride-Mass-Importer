@@ -6,7 +6,7 @@ namespace HS.Stride.Mass.Importer.Console
 {
     internal class Program
     {
-        private const string VERSION = "0.8.0";
+        private const string VERSION = "0.9.0";
         
         static async Task Main(string[] args)
         {

@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Version>0.9.0</Version>
+    <AssemblyVersion>0.9.0.0</AssemblyVersion>
+    <FileVersion>0.9.0.0</FileVersion>
+    <Copyright>© 2025 Happenstance Games LLC</Copyright>
+    <Company>Happenstance Games LLC</Company>
+    <Product>HS Stride Mass Importer</Product>
+    <Description>WPF application for mass importing assets into Stride Engine projects</Description>
+    <ApplicationIcon>hs_mass.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="hs_mass.ico" />
+    <None Remove="hs_mass_importer.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="hs_mass.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HS.Stride.Mass.Importer.Core\HS.Stride.Mass.Importer.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="hs_mass.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="hs_mass_importer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>

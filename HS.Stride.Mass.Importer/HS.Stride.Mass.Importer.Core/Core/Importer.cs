@@ -190,8 +190,8 @@ namespace HS.Stride.Mass.Importer.Core
         {
             try
             {
-                // Create Materials subfolder in the same location as the texture
-                var materialsFolder = Path.Combine(textureFolder, "Materials");
+                // Create Materials folder at the package level (same level as texture folders)
+                var materialsFolder = Path.Combine(targetAssets, "Materials");
                 FileHelper.EnsureDirectoryExists(materialsFolder);
 
                 // Generate basic material pointing to this texture asset (not the resource file)

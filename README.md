@@ -1,7 +1,11 @@
 # HS Stride Mass Importer
 A bulk asset importer for the Stride game engine that converts raw asset files (.fbx, .png, .jpg, etc.) into proper Stride assets (.sdtex, .sdmat, .sdm3d, etc.) with correct folder structure and cross-references.
 
-![HS Mass Console Interface](console-screenshot.png)
+Available as both a **modern UI application** and **console application**:
+
+## 🖥️ UI
+![HS Mass Importer UI](mass-Importer-ui.PNG)
+
 
 ## 🎯 Why This Tool Exists
 Importing hundreds of game assets one-by-one in Stride GameStudio is tedious and time-consuming. This tool automates the bulk import process while maintaining proper folder organization and asset relationships.
@@ -48,13 +52,23 @@ Mass importing .json data and CSV files for dialog systems created in external t
 - Stride Game Project (4.2 or newer recommended)
 
 ### Getting Started
+
+#### Option 1: UI Application (Recommended)
+1. Build and run `HS.Stride.Mass.Importer.UI`
+2. Fill in the 3 fields:
+   - **📥 Package Name:** Enter a name for your asset package (e.g., "SyntyPack", "Characters")
+   - **📂 Source Assets Folder:** Browse and select the folder containing your raw assets
+   - **🎯 Target Project:** Browse and select your Stride project directory
+3. Click **Import Package** to start the process
+
+#### Option 2: Console Application
 1. Build and run `HS.Stride.Mass.Importer.Console`
 2. Follow the 3-step wizard:
    - **Step 1:** Enter package name (e.g., "SyntyPack", "Characters")
    - **Step 2:** Select source folder containing your raw assets
    - **Step 3:** Select target Stride project directory
 
-The importer will automatically:
+Both applications will automatically:
 - Scan and categorize your assets
 - Copy resources with proper folder structure
 - Generate Stride assets with correct references
@@ -93,14 +107,13 @@ StrideProject/
 └── Assets/PackageName/
     ├── Characters/
     │   ├── hero.sdm3d
-    │   ├── hero_texture.sdtex
-    │   └── Materials/
-    │       └── hero_texture_Mat.sdmat
+    │   └── hero_texture.sdtex
     ├── Weapons/
     │   ├── sword.sdm3d
-    │   ├── sword_diffuse.sdtex
-    │   └── Materials/
-    │       └── sword_diffuse_Mat.sdmat
+    │   └── sword_diffuse.sdtex
+    ├── Materials/              # Materials organized at package level
+    │   ├── hero_texture_Mat.sdmat
+    │   └── sword_diffuse_Mat.sdmat
     └── Audio/
         └── sword_clash.sdsnd
 ```

@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36109.1 d17.14
+VisualStudioVersion = 17.14.36109.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HS.Stride.Mass.Importer.Core", "HS.Stride.Mass.Importer.Core\HS.Stride.Mass.Importer.Core.csproj", "{7F24E2C5-1848-404C-B9F9-F4DED3261CFF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HS.Stride.Mass.Importer.Console", "HS.Stride.Mass.Importer.Console\HS.Stride.Mass.Importer.Console.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HS.Stride.Mass.Importer.UI", "HS.Stride.Mass.Importer.UI\HS.Stride.Mass.Importer.UI.csproj", "{0F96A08F-699C-49FB-80E8-6011AD3BEA58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F96A08F-699C-49FB-80E8-6011AD3BEA58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F96A08F-699C-49FB-80E8-6011AD3BEA58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F96A08F-699C-49FB-80E8-6011AD3BEA58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F96A08F-699C-49FB-80E8-6011AD3BEA58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
