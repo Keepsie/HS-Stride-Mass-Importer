@@ -65,9 +65,13 @@ Layers: {{}}
             var materialsSection = "";
             if (materialReferences?.Any() == true)
             {
-                var materialEntries = materialReferences.Select(m => 
+                var materialEntries = materialReferences.Select(m =>
                     $"    {GenerateMaterialHash(m.Key)}:\n        Name: {m.Key}\n        MaterialInstance:\n            Material: {m.Value}");
-                materialsSection = string.Join("\n", materialEntries);
+                materialsSection = "\n" + string.Join("\n", materialEntries);
+            }
+            else
+            {
+                materialsSection = " {}";
             }
 
             var skeletonRef = string.IsNullOrEmpty(skeletonReference) ? "null" : skeletonReference;
