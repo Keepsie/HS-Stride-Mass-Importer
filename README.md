@@ -21,8 +21,9 @@ Importing hundreds of game assets one-by-one in Stride GameStudio is tedious and
 
 ### ✅ Fully Supported Assets
 - **Textures** (.png, .jpg, .jpeg, .bmp, .tga, .dds) → `.sdtex` assets
-- **3D Models** (.fbx, .obj, .dae, .gltf, .glb) → `.sdm3d` assets  
+- **3D Models** (.fbx, .obj, .dae, .gltf, .glb) → `.sdm3d` assets
 - **Materials** (auto-generated from textures) → `.sdmat` assets
+- **Fonts** (.ttf, .otf, .ttc, .woff, .woff2) → `.sdfnt` assets
 - **Raw Assets** (.json, .xml, .txt, .csv) → `.sdraw` assets
 - **Audio Files** (.wav, .mp3, .ogg, .flac) → `.sdsnd` assets
 - **C# Code** (.cs) → Imported directly into your project's code folder
@@ -30,10 +31,11 @@ Importing hundreds of game assets one-by-one in Stride GameStudio is tedious and
 ⚠️ **Note on .cs files:** C# scripts are imported directly as source code into your project, but most asset packs include Unity-specific code that won't compile in Stride. These scripts typically need significant modification to work with Stride's API.
 
 ### ⚠️ What You Should Import Manually
+- **Sprites** - Images import as Textures (.sdtex), not Sprites (.sdsprite). For 2D/UI sprites, drag files directly into GameStudio
 - **Animations** - Complex import requiring precise control
 - **Skeletons** - Requires manual setup and configuration
 - **Complex Materials** - Auto-generated materials are basic; create custom materials in GameStudio
-- **Specialized Assets** - Fonts, videos, shaders, etc.
+- **Specialized Assets** - Videos, shaders, etc.
 
 ### 🔄 Automatic Features
 - **Folder Structure Preservation** - Maintains your source organization
@@ -151,6 +153,7 @@ AssetPack/
 | Textures | .png, .jpg, .jpeg, .bmp, .tga, .dds | .sdtex assets |
 | Models | .fbx, .obj, .dae, .gltf, .glb | .sdm3d assets |
 | Audio | .wav, .mp3, .ogg, .flac | .sdsnd assets |
+| Fonts | .ttf, .otf, .ttc, .woff, .woff2 | .sdfnt assets |
 | Raw Assets | .json, .xml, .txt, .csv | .sdraw assets |
 | C# Code | .cs | Source code files |
 

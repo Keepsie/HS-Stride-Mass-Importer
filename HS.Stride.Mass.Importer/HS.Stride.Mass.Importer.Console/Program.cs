@@ -1,12 +1,20 @@
 // HS Stride Mass Importer (c) 2025 Happenstance Games LLC - Apache License 2.0
 
+using System.Reflection;
 using HS.Stride.Mass.Importer.Core;
 
 namespace HS.Stride.Mass.Importer.Console
 {
     internal class Program
     {
-        private const string VERSION = "0.9.0";
+        private static string VERSION
+        {
+            get
+            {
+                var version = Assembly.GetExecutingAssembly().GetName().Version;
+                return $"{version?.Major}.{version?.Minor}.{version?.Build}";
+            }
+        }
         
         static async Task Main(string[] args)
         {

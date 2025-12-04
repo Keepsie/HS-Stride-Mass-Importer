@@ -50,6 +50,12 @@ namespace HS.Stride.Mass.Importer.Core
                 AssetExtension = ".sdsnd";
                 SubFolder = "Audio";
             }
+            else if (PathHelper.IsFontFile(SourcePath))
+            {
+                AssetType = "Font";
+                AssetExtension = ".sdfnt";
+                SubFolder = "Fonts";
+            }
             else if (Extension == ".cs")
             {
                 AssetType = "Code";
@@ -107,6 +113,7 @@ namespace HS.Stride.Mass.Importer.Core
         public int GetTextureCount() => Items.Count(i => i.AssetType == "Texture");
         public int GetModelCount() => Items.Count(i => i.AssetType == "Model");
         public int GetAudioCount() => Items.Count(i => i.AssetType == "Audio");
+        public int GetFontCount() => Items.Count(i => i.AssetType == "Font");
         public int GetRawAssetCount() => Items.Count(i => i.AssetType == "RawAsset");
         public int GetCodeFileCount() => Items.Count(i => i.AssetType == "Code");
     }

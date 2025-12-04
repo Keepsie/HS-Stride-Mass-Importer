@@ -155,6 +155,7 @@ namespace HS.Stride.Mass.Importer.Core
                         "Texture" => _assetGenerator.GenerateTextureAsset(item.SourcePath, GetPackageNameFromPath(targetResources), item.AssetName),
                         "Model" => _assetGenerator.GenerateModelAsset(item.SourcePath, GetPackageNameFromPath(targetResources), item.AssetName),
                         "Audio" => _assetGenerator.GenerateSoundAsset(item.SourcePath, GetPackageNameFromPath(targetResources), item.AssetName),
+                        "Font" => _assetGenerator.GenerateFontAsset(item.SourcePath, GetPackageNameFromPath(targetResources), item.AssetName),
                         "RawAsset" => _assetGenerator.GenerateRawAsset(item.SourcePath, GetPackageNameFromPath(targetResources), item.AssetName),
                         _ => throw new NotSupportedException($"Asset type {item.AssetType} not supported")
                     };
