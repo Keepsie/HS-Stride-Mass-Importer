@@ -84,6 +84,12 @@ namespace HS.Stride.Mass.Importer.Utilities
             return new[] { ".wav", ".ogg", ".mp3", ".flac" }.Contains(extension);
         }
 
+        public static bool IsFontFile(string filePath)
+        {
+            var extension = Path.GetExtension(filePath).ToLower();
+            return new[] { ".ttf", ".otf", ".ttc", ".woff", ".woff2" }.Contains(extension);
+        }
+
         public static bool IsRawAssetFile(string filePath)
         {
             // Files that should be imported as raw assets (preserved as-is)

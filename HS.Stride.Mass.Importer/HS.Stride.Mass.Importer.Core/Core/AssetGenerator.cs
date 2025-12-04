@@ -136,5 +136,21 @@ Spatialized: false
 ";
         }
 
+        public string GenerateFontAsset(string fontPath, string packageName, string assetName)
+        {
+            var guid = Guid.NewGuid().ToString();
+            var resourcePath = $"../../Resources/{packageName}/{Path.GetFileName(fontPath)}";
+
+            return $@"!SpriteFont
+Id: {guid}
+SerializedVersion: {{Stride: 2.0.0.0}}
+Tags: []
+FontSource: !FileFontProvider
+    Source: !file {resourcePath}
+FontType: !RuntimeRasterizedSpriteFontType
+    Size: 24.0
+";
+        }
+
     }
 }

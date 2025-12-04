@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Reflection;
+using System.Windows;
 using HS.Stride.Mass.Importer.Core;
 
 namespace HS.Stride.Mass.Importer.UI
@@ -11,6 +12,9 @@ namespace HS.Stride.Mass.Importer.UI
         {
             InitializeComponent();
             _importer = new StrideMassImporter();
+
+            var version = Assembly.GetExecutingAssembly().GetName().Version;
+            Title = $"HS Stride Mass Importer v{version?.Major}.{version?.Minor}.{version?.Build} - © 2025 Happenstance Games";
         }
 
         private void BrowseSourceButton_Click(object sender, RoutedEventArgs e)
