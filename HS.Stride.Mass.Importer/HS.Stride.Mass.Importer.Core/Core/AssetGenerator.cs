@@ -24,7 +24,6 @@ Tags: []
 Source: !file {resourcePath}
 Type: !ColorTextureType
     ColorKeyColor: {{R: 255, G: 0, B: 255, A: 255}}
-    PremultiplyAlpha: false
 ";
         }
 

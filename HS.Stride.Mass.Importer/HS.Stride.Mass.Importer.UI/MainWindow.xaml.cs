@@ -66,7 +66,7 @@ namespace HS.Stride.Mass.Importer.UI
             // Check for existing package
             if (_importer.PackageExists(packageName, strideProject))
             {
-                var result = System.Windows.MessageBox.Show($"Package '{packageName}' already exists!\nDo you want to overwrite it?", "Package Exists", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                var result = System.Windows.MessageBox.Show($"Package '{packageName}' already exists.\nSame-named files will be overwritten. Continue?", "Package Exists", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result != MessageBoxResult.Yes)
                     return;
             }

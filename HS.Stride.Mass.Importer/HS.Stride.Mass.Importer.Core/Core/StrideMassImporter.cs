@@ -18,9 +18,9 @@ namespace HS.Stride.Mass.Importer.Core
             _importer = new Importer();
         }
         
-        public Task<ImportResult> ImportAssetsAsync(string packageName, string sourceFolder, string strideProjectPath)
+        public Task<ImportResult> ImportAssetsAsync(string packageName, string sourceFolder, string strideProjectPath, bool createMaterials = true)
         {
-            return Task.FromResult(_importer.ImportPackage(packageName, sourceFolder, strideProjectPath));
+            return Task.FromResult(_importer.ImportPackage(packageName, sourceFolder, strideProjectPath, createMaterials));
         }
         
         public ValidationResult ValidateInputs(string packageName, string sourceFolder, string strideProjectPath)

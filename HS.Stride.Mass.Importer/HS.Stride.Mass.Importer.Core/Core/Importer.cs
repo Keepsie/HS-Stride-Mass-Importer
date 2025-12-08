@@ -15,7 +15,7 @@ namespace HS.Stride.Mass.Importer.Core
             _assetGenerator = new AssetGenerator();
         }
 
-        public ImportResult ImportPackage(string packageName, string packageFolder, string strideProject)
+        public ImportResult ImportPackage(string packageName, string packageFolder, string strideProject, bool createMaterials = true)
         {
             // 1. Validate inputs
             ValidateInputs(packageName, packageFolder, strideProject);
@@ -51,7 +51,7 @@ namespace HS.Stride.Mass.Importer.Core
                 // Clean single loop: foreach asset, copy resource and create .sd* asset
                 foreach (var item in scanResult.Items)
                 {
-                    ProcessSingleAsset(item, targetAssets, targetResources, targetCode, packageFolder, packageName, result);
+                    ProcessSingleAsset(item, targetAssets, targetResources, targetCode, packageFolder, packageName, result, createMaterials);
                 }
 
                 result.Success = true;
@@ -62,7 +62,7 @@ namespace HS.Stride.Mass.Importer.Core
                 // Count processed assets by type
                 result.ProcessedTextures = scanResult.Items.Count(i => i.AssetType == "Texture");
                 result.ProcessedModels = scanResult.Items.Count(i => i.AssetType == "Model");
-                result.ProcessedMaterials = scanResult.Items.Count(i => i.AssetType == "Texture"); // Materials are created for textures
+                result.ProcessedMaterials = createMaterials ? scanResult.Items.Count(i => i.AssetType == "Texture") : 0; // Materials are created for textures only if enabled
             }
             catch (Exception ex)
             {
@@ -92,20 +92,21 @@ namespace HS.Stride.Mass.Importer.Core
 
         private void CheckForConflicts(string strideProject, TargetProjectStructure projectStructure, string packageName)
         {
+            // If folder exists, we now allow importing into it and overwriting same-named files
+            // This is the expected behavior when users want to replace/update existing assets
             var existingAssetFolder = Path.Combine(strideProject, projectStructure.AssetsPath, packageName);
             if (Directory.Exists(existingAssetFolder))
             {
                 var existingFiles = Directory.GetFiles(existingAssetFolder, "*.sd*", SearchOption.AllDirectories);
                 if (existingFiles.Any())
                 {
-                    throw new InvalidOperationException( //Not overwriting for now at least users can change this later if they want.
-                        $"Package '{packageName}' already exists with {existingFiles.Length} asset files. " +
-                        "Please choose a different name or remove the existing package.");
+                    Console.WriteLine($"Note: Package '{packageName}' already exists with {existingFiles.Length} asset files. " +
+                        "Same-named files will be overwritten.");
                 }
             }
         }
 
-        private void ProcessSingleAsset(AssetImportItem item, string targetAssets, string targetResources, string targetCode, string sourceFolder, string packageName, ImportResult result)
+        private void ProcessSingleAsset(AssetImportItem item, string targetAssets, string targetResources, string targetCode, string sourceFolder, string packageName, ImportResult result, bool createMaterials)
         {
             try
             {
@@ -175,8 +176,8 @@ namespace HS.Stride.Mass.Importer.Core
                     }
                 }
 
-                // 8. Create basic material for each texture with proper reference
-                if (item.AssetType == "Texture" && !string.IsNullOrEmpty(textureAssetGuid))
+                // 8. Create basic material for each texture with proper reference (if enabled)
+                if (createMaterials && item.AssetType == "Texture" && !string.IsNullOrEmpty(textureAssetGuid))
                 {
                     CreateBasicMaterialForTexture(item, assetTargetFolder, targetAssets, targetResourcePath, textureAssetGuid, textureAssetName);
                 }
