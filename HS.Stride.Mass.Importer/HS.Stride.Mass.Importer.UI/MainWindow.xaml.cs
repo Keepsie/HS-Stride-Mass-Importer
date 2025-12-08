@@ -78,7 +78,7 @@ namespace HS.Stride.Mass.Importer.UI
 
             try
             {
-                var importResult = await _importer.ImportAssetsAsync(packageName, sourceFolder, strideProject);
+                var importResult = await _importer.ImportAssetsAsync(packageName, sourceFolder, strideProject, CreateMaterialsCheckBox.IsChecked == true);
                 
                 if (importResult.Success)
                 {

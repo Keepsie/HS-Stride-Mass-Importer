@@ -83,12 +83,22 @@
                                FontSize="11" Foreground="#666" Margin="0,4,0,0"/>
                 </StackPanel>
                 
+                <!-- Options -->
+                <StackPanel Margin="0,0,0,30">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                        <TextBlock Text="⚙" FontSize="16" Margin="0,0,8,0" Foreground="#666"/>
+                        <TextBlock Text="Options" FontSize="14" FontWeight="SemiBold" Foreground="#333" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <CheckBox Name="CreateMaterialsCheckBox" Content="Create materials for textures"
+                              IsChecked="True" FontSize="13" Foreground="#333"/>
+                </StackPanel>
+
                 <!-- Warning -->
-                <Border Background="#FFF3CD" BorderBrush="#FFEAA7" BorderThickness="1" 
+                <Border Background="#FFF3CD" BorderBrush="#FFEAA7" BorderThickness="1"
                         CornerRadius="4" Padding="12" Margin="0,0,0,30">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="⚠" FontSize="16" Foreground="#856404" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                        <TextBlock Text="Important: Close Stride GameStudio before importing packages" 
+                        <TextBlock Text="Important: Close Stride GameStudio before importing packages"
                                    FontSize="12" Foreground="#856404" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Border>
