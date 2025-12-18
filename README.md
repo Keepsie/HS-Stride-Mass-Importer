@@ -159,42 +159,19 @@ AssetPack/
 
 **Note:** .cs files from asset packs are usually Unity-specific and require modification for Stride.
 
-## 🚨 Blender Users: FBX vs glTF
+## 🔧 Model Import Tips
 
-### Recommended: Use glTF/GLB from Blender
-**glTF/GLB exports from Blender work cleanly with Stride** - no special steps needed.
+### Having Issues with Models?
+**Try GLB instead of FBX** - GLB/glTF format works cleanly with Stride and avoids most transform issues.
 
+### FBX from Blender
+If using FBX from Blender, enable **Apply Transform** on export to avoid scale/rotation problems:
 ```
-Blender → File → Export → glTF 2.0 (.glb/.gltf)
-```
-
-This has been tested with rigged models, Auto Rig Pro, and standard Blender workflows. Just export and import - it works.
-
-### FBX from Blender: Works If You Apply Transform
-FBX exports from Blender work with Stride as long as you enable **Apply Transform** on export. Without it, you may get scale, rotation, and transform problems.
-
-```
-File → Export → FBX
-└── Transform Section
-    └── ☑️ Apply Transform (Experimental) ← ALWAYS check this!
+File → Export → FBX → Transform → ☑️ Apply Transform
 ```
 
-### Double-Export Workaround (Auto Rig Pro or When Apply Transform Isn't Available)
-
-If you're using Auto Rig Pro or another tool where you can't apply transform on export:
-
-1. Export mesh and bones only (use ARP's export menu if available)
-2. Re-import the FBX back into a fresh Blender scene
-3. Apply scale on bones specifically
-4. Export again with **Apply Transform** enabled
-5. Import this double-exported FBX to Stride
-
-### FBX from Other Tools Works Fine
-- **Mixamo** → FBX works directly
-- **Cascadeur** → FBX works directly
-- **Maya** → FBX works directly
-
-The FBX issue is specific to Blender's exporter, not FBX in general.
+### FBX from Other Tools
+FBX from Mixamo, Maya, Cascadeur, etc. typically works without issues.
 
 ## ⚠️ Important Limitations
 
