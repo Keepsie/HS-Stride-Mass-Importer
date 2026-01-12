@@ -8,9 +8,14 @@
     <AssemblyVersion>1.1.0.0</AssemblyVersion>
     <FileVersion>1.1.0.0</FileVersion>
     <Copyright>© 2025 Happenstance Games LLC</Copyright>
+    <Authors>Happenstance Games LLC</Authors>
     <Company>Happenstance Games LLC</Company>
     <Product>HS Stride Mass Importer</Product>
     <Description>Core library for mass importing raw assets into Stride Engine projects</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" Condition="Exists('..\..\README.md')" />
+  </ItemGroup>
 </Project>
