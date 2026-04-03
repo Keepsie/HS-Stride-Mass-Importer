@@ -1,0 +1,424 @@
+HS STRIDE MASS IMPORTER CORE - LLM API REFERENCE
+================================================
+Version: 1.1.0 | .NET 8.0 | Package: HS.Stride.Mass.Importer.Core
+Copyright (c) 2025 Happenstance Games LLC | Apache License 2.0
+
+Bulk import assets (textures, models, audio, fonts) into Stride projects.
+Automatically creates Stride asset files (.sdtex, .sdm3d, .sdsnd, etc.) and optional materials.
+
+================================================================================
+QUICK START
+================================================================================
+
+```csharp
+using HS.Stride.Mass.Importer.Core;
+
+var importer = new StrideMassImporter();
+
+// Import assets into Stride project
+var result = await importer.ImportAssetsAsync(
+    packageName: "MyAssets",
+    sourceFolder: @"C:\UnityAssets\MyPack",
+    strideProjectPath: @"C:\MyStrideGame",
+    createMaterials: false);
+
+if (result.Success)
+{
+    Console.WriteLine($"Imported {result.AssetsCreated} assets");
+    Console.WriteLine($"Assets: {result.TargetAssetsPath}");
+    Console.WriteLine($"Resources: {result.TargetResourcesPath}");
+}
+else
+{
+    Console.WriteLine($"Failed: {result.ErrorMessage}");
+}
+```
+
+================================================================================
+STRIDEMASSIMPORTER (Main Entry Point)
+================================================================================
+Namespace: HS.Stride.Mass.Importer.Core
+
+Constructor:
+  new StrideMassImporter()    // No parameters
+
+Methods:
+
+  Task<ImportResult> ImportAssetsAsync(
+      string packageName,           // Folder name for imported assets
+      string sourceFolder,          // Path to raw assets
+      string strideProjectPath,     // Path to Stride project root
+      bool createMaterials = true)  // Generate materials for textures
+
+  ValidationResult ValidateInputs(
+      string packageName,
+      string sourceFolder,
+      string strideProjectPath)
+
+  ImportScanResult PreviewImport(string sourceFolder)
+
+  bool PackageExists(string packageName, string strideProjectPath)
+
+================================================================================
+IMPORTRESULT (Operation Result)
+================================================================================
+
+Properties:
+  bool Success
+  string ErrorMessage
+  string TargetAssetsPath           // e.g., "C:\Game\Assets\MyPack"
+  string TargetResourcesPath        // e.g., "C:\Game\Resources\MyPack"
+  TargetProjectStructure? ProjectStructure
+
+Statistics:
+  int AssetsCreated
+  int ResourcesCopied
+  int CodeFilesCopied
+  int ProcessedTextures
+  int ProcessedModels
+  int ProcessedMaterials
+
+Error Tracking:
+  List<string> Errors
+  List<string> Warnings
+  bool HasErrors
+  bool HasWarnings
+
+Methods:
+  string GetReport()                // Formatted summary
+
+================================================================================
+VALIDATIONRESULT
+================================================================================
+
+Properties:
+  List<string> Errors
+  List<string> Warnings
+  bool IsValid                      // True if no errors
+
+================================================================================
+IMPORTSCANRESULT (Preview Results)
+================================================================================
+
+Properties:
+  List<AssetImportItem> Items
+
+Methods:
+  int GetTotalFileCount()
+  int GetTextureCount()
+  int GetModelCount()
+  int GetAudioCount()
+  int GetFontCount()
+  int GetRawAssetCount()
+  int GetCodeFileCount()
+
+================================================================================
+ASSETIMPORTITEM (Individual Asset)
+================================================================================
+
+Properties:
+  string AssetType      // "Texture", "Model", "Audio", "Font", "RawAsset", "Code", "Unknown"
+  string SourcePath     // Original file path
+  string ResourcePath   // Relative path to Resources folder
+  string AssetPath      // Path to generated Stride asset
+  string AssetName      // Clean name for Stride
+  string FileName       // Original filename
+  string Extension      // File extension (lowercase)
+  long FileSize
+  string AssetExtension // Target Stride extension (.sdtex, etc.)
+  string SubFolder      // Category folder (Textures, Models, etc.)
+
+Methods:
+  bool ShouldCreateStrideAsset()
+
+================================================================================
+SUPPORTED FILE TYPES
+================================================================================
+
+| Type     | Extensions                      | Stride Output | SubFolder |
+|----------|--------------------------------|---------------|-----------|
+| Texture  | .png .jpg .jpeg .bmp .tga .dds | .sdtex        | Textures  |
+| Model    | .fbx .obj .dae .gltf .glb      | .sdm3d        | Models    |
+| Audio    | .wav .mp3 .ogg .flac           | .sdsnd        | Audio     |
+| Font     | .ttf .otf .ttc .woff .woff2    | .sdfnt        | Fonts     |
+| RawAsset | .json .xml .txt .csv           | .sdraw        | Data      |
+| Code     | .cs                            | .cs           | Code      |
+
+Ignored Files:
+  .meta, .tmp, .temp, .log, .bak, .old, thumbs.db, .ds_store, desktop.ini
+
+================================================================================
+OUTPUT STRUCTURE
+================================================================================
+
+After importing "MyPack" into a Stride project:
+
+Assets/MyPack/
+├── Textures/
+│   └── texture_name.sdtex
+├── Models/
+│   └── model_name.sdm3d
+├── Materials/                     # If createMaterials=true
+│   └── texture_name_Mat.sdmat
+├── Audio/
+│   └── sound_name.sdsnd
+├── Fonts/
+│   └── font_name.sdfnt
+└── Data/
+    └── config.sdraw
+
+Resources/MyPack/
+├── texture_name.png               # Raw files copied here
+├── model_name.fbx
+└── sound_name.wav
+
+================================================================================
+PATHHELPER (Utilities)
+================================================================================
+Namespace: HS.Stride.Mass.Importer.Utilities
+
+Static Methods:
+
+  bool IsStrideProject(string directoryPath)
+  ProjectValidationResult ValidateStrideProject(string directoryPath)
+
+  bool IsImageFile(string filePath)
+  bool IsModelFile(string filePath)
+  bool IsAudioFile(string filePath)
+  bool IsFontFile(string filePath)
+  bool IsRawAssetFile(string filePath)
+  bool ShouldIgnoreFile(string filePath)
+
+  string MakeValidAssetName(string input)    // Sanitizes name for Stride
+
+ProjectValidationResult:
+  bool IsValid
+  bool HasSolutionFile
+  bool HasStridePackages
+  string ErrorMessage
+  string SuccessMessage
+  List<string> Suggestions
+
+================================================================================
+FILEHELPER (File Operations)
+================================================================================
+Namespace: HS.Stride.Mass.Importer.Utilities
+
+Static Methods:
+
+  bool SaveFile(string content, string filePath)     // Creates dirs automatically
+  bool EnsureDirectoryExists(string path)
+  bool CopyFile(string source, string dest, bool overwrite = true)
+  string GetFileHash(string filePath)                // SHA256 hex string
+
+================================================================================
+PROJECTSTRUCTUREDETECTOR
+================================================================================
+Namespace: HS.Stride.Mass.Importer.Utilities
+
+Static Methods:
+
+  TargetProjectStructure DetectTargetProjectStructure(string projectPath)
+
+TargetProjectStructure:
+  ProjectStructureType Type         // Fresh, Template, Unknown
+  string AssetsPath                 // e.g., "Assets" or "ProjectName/Assets"
+  string ResourcesPath
+  string CodePath
+
+ProjectStructureType:
+  Unknown   // Unrecognized
+  Fresh     // New project: ProjectName/ProjectName/Assets/
+  Template  // Template: Assets/ at root
+
+================================================================================
+ASSETGENERATOR (Stride Asset Creation)
+================================================================================
+Namespace: HS.Stride.Mass.Importer.Core
+
+Methods (return YAML strings for Stride assets):
+
+  string GenerateTextureAsset(string imagePath, string packageName, string assetName)
+  string GenerateModelAsset(string fbxPath, string packageName, string modelName,
+      Dictionary<string, string>? materialReferences = null,
+      string? skeletonReference = null)
+  string GenerateSoundAsset(string audioPath, string packageName, string assetName)
+  string GenerateFontAsset(string fontPath, string packageName, string assetName)
+  string GenerateRawAsset(string filePath, string packageName, string assetName)
+  string GenerateMaterialAsset(string materialName,
+      string? textureGuid = null, string? textureName = null)
+
+================================================================================
+ASSETSCANNER
+================================================================================
+Namespace: HS.Stride.Mass.Importer.Core
+
+Methods:
+
+  ImportScanResult ScanPackageFolder(string packageFolder, string packageName)
+
+Throws: DirectoryNotFoundException if folder doesn't exist
+
+================================================================================
+IMPORTER (Core Engine)
+================================================================================
+Namespace: HS.Stride.Mass.Importer.Core
+
+Methods:
+
+  ImportResult ImportPackage(string packageName, string packageFolder,
+      string strideProject, bool createMaterials = true)
+
+Throws:
+  ArgumentException - Invalid package name
+  DirectoryNotFoundException - Missing folders
+  InvalidOperationException - Not valid Stride project
+
+================================================================================
+REAL-WORLD USAGE PATTERN (from HS-Stride-UI-Editor)
+================================================================================
+
+```csharp
+// Pattern: Copy files to temp folder, import, cleanup
+
+var importer = new StrideMassImporter();
+
+// Create temp folder with selected files
+var tempFolder = Path.Combine(Path.GetTempPath(), $"HS_Import_{Guid.NewGuid():N}");
+Directory.CreateDirectory(tempFolder);
+
+try
+{
+    // Copy files to import into temp folder
+    foreach (var file in selectedFiles)
+    {
+        var destPath = Path.Combine(tempFolder, file.FileName);
+        File.Copy(file.FullPath, destPath, overwrite: true);
+    }
+
+    // Run the import
+    var result = await importer.ImportAssetsAsync(
+        packageName: "Textures",
+        sourceFolder: tempFolder,
+        strideProjectPath: projectPath,
+        createMaterials: false);
+
+    if (result.Success)
+    {
+        // Assets now available at result.TargetAssetsPath
+        // Raw files at result.TargetResourcesPath
+    }
+    else
+    {
+        // Handle error via result.ErrorMessage
+    }
+}
+finally
+{
+    // Cleanup temp folder
+    try { Directory.Delete(tempFolder, recursive: true); }
+    catch { /* ignore cleanup errors */ }
+}
+```
+
+================================================================================
+COMMON PATTERNS
+================================================================================
+
+### Import Unity Asset Pack
+```csharp
+var importer = new StrideMassImporter();
+var result = await importer.ImportAssetsAsync(
+    "SyntyPolygon",
+    @"C:\UnityAssets\PolygonFantasy",
+    @"C:\MyStrideGame",
+    createMaterials: true);
+```
+
+### Preview Before Import
+```csharp
+var preview = importer.PreviewImport(@"C:\UnityAssets\MyPack");
+Console.WriteLine($"Textures: {preview.GetTextureCount()}");
+Console.WriteLine($"Models: {preview.GetModelCount()}");
+Console.WriteLine($"Audio: {preview.GetAudioCount()}");
+Console.WriteLine($"Total: {preview.GetTotalFileCount()}");
+```
+
+### Check If Package Exists
+```csharp
+if (importer.PackageExists("MyPack", @"C:\StrideGame"))
+{
+    Console.WriteLine("Package already imported - will update existing files");
+}
+```
+
+### Full Validation
+```csharp
+var validation = importer.ValidateInputs(packageName, sourceFolder, projectPath);
+
+if (!validation.IsValid)
+{
+    foreach (var error in validation.Errors)
+        Console.WriteLine($"Error: {error}");
+    return;
+}
+```
+
+### Access Scan Results
+```csharp
+var scan = importer.PreviewImport(sourceFolder);
+foreach (var item in scan.Items)
+{
+    Console.WriteLine($"{item.AssetType}: {item.FileName} -> {item.AssetPath}");
+}
+```
+
+================================================================================
+VALIDATION RULES
+================================================================================
+
+Package Name:
+  - Cannot be empty or whitespace
+  - Cannot contain: / \ : * ? " < > |
+  - Valid: "MyPack", "Synty_Fantasy", "vfx-pack-01"
+  - Invalid: "My/Pack", "Pack:01", "My*Assets"
+
+Source Folder:
+  - Must exist
+  - Should contain importable files
+  - Warning if empty
+
+Stride Project:
+  - Must contain .sln file
+  - Must contain .sdpkg file(s)
+  - Supports Fresh and Template structures
+
+================================================================================
+ERROR HANDLING
+================================================================================
+
+```csharp
+var result = await importer.ImportAssetsAsync(...);
+
+if (!result.Success)
+{
+    Console.WriteLine($"Failed: {result.ErrorMessage}");
+}
+
+if (result.HasErrors)
+{
+    foreach (var error in result.Errors)
+        Console.WriteLine($"Error: {error}");
+}
+
+if (result.HasWarnings)
+{
+    foreach (var warning in result.Warnings)
+        Console.WriteLine($"Warning: {warning}");
+}
+
+// Full report
+Console.WriteLine(result.GetReport());
+```
+
+================================================================================

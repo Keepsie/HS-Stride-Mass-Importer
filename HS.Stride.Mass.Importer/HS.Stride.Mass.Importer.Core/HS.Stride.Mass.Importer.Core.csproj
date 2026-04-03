@@ -7,15 +7,24 @@
     <Version>1.1.0</Version>
     <AssemblyVersion>1.1.0.0</AssemblyVersion>
     <FileVersion>1.1.0.0</FileVersion>
-    <Copyright>© 2025 Happenstance Games LLC</Copyright>
+    <Copyright>© 2025-2026 Happenstance Games LLC</Copyright>
     <Authors>Happenstance Games LLC</Authors>
     <Company>Happenstance Games LLC</Company>
     <Product>HS Stride Mass Importer</Product>
-    <Description>Core library for mass importing raw assets into Stride Engine projects</Description>
+    <Description>Bulk import assets into Stride Engine projects without the editor. Converts textures, models, audio, and fonts into Stride asset files (.sdtex, .sdm3d, .sdsnd, .sdmat, etc.) with correct folder structure and cross-references.</Description>
+    <PackageId>HS.Stride.Mass.Importer.Core</PackageId>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Keepsie/HS-Stride-Mass-Importer</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Keepsie/HS-Stride-Mass-Importer</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>stride;stride3d;game-engine;asset-importer;bulk-import;gamedev;stride-engine</PackageTags>
+    <PackageReleaseNotes>v1.1.0 - Added material generation option, critical .png fix</PackageReleaseNotes>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\..\README.md" Pack="true" PackagePath="\" Condition="Exists('..\..\README.md')" />
+    <None Include="..\..\hs_stride_mass_importer_api.txt" Pack="true" PackagePath="\" Condition="Exists('..\..\hs_stride_mass_importer_api.txt')" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,35 @@
 # HS Stride Mass Importer
 A bulk asset importer for the Stride game engine that converts raw asset files (.fbx, .png, .jpg, etc.) into proper Stride assets (.sdtex, .sdmat, .sdm3d, etc.) with correct folder structure and cross-references.
 
-Available as both a **modern UI application** and **console application**:
+Available as a **NuGet package**, **modern UI application**, and **console application**.
+
+## 📦 NuGet Package
+
+To use the core library in your own project:
+
+```
+dotnet add package HS.Stride.Mass.Importer.Core
+```
+
+```csharp
+using HS.Stride.Mass.Importer.Core;
+
+var importer = new StrideMassImporter();
+var result = await importer.ImportAssetsAsync(
+    packageName: "MyAssets",
+    sourceFolder: @"C:\UnityAssets\MyPack",
+    strideProjectPath: @"C:\MyStrideGame",
+    createMaterials: true);
+
+if (result.Success)
+    Console.WriteLine($"Imported {result.AssetsCreated} assets");
+```
+
+Install `HS.Stride.Mass.Importer.Core` alone if you want to integrate asset importing into your own tools or pipelines without the UI or console app.
+
+---
+
+Also available as both a **UI application** and **console application**:
 
 ## 🖥️ UI
 ![HS Mass Importer UI](mass-Importer-ui.PNG)
